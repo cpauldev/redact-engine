@@ -2,7 +2,7 @@
 
 # RedactLog: Redaction-First Logging for TypeScript
 
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Logging](https://img.shields.io/badge/-Logging-4F46E5?style=flat-square) ![Console](https://img.shields.io/badge/-Console_Bridge-06B6D4?style=flat-square) ![License](https://img.shields.io/badge/-MIT_License-blue?style=flat-square) [![Changelog](https://img.shields.io/badge/Changelog-v0.1.0-blue?style=flat-square)](./CHANGELOG.md)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Logging](https://img.shields.io/badge/-Logging-4F46E5?style=flat-square) ![Console](https://img.shields.io/badge/-Console_Bridge-06B6D4?style=flat-square) ![License](https://img.shields.io/badge/-MIT_License-blue?style=flat-square) [![Changelog](https://img.shields.io/badge/Changelog-v0.1.1-blue?style=flat-square)](./CHANGELOG.md)
 
 RedactLog is a small, framework-agnostic TypeScript toolkit for removing secrets, credentials, cookies, JWTs, provider identifiers, and sensitive object fields before data reaches logs. It gives your app one redaction layer instead of relying on every callsite to remember what is safe to print.
 
@@ -181,7 +181,7 @@ bun run test:smoke
 ## Related Packages
 
 - [`rate-engine`](https://github.com/cpauldev/rate-engine) for policy-driven rate limiting.
-- [`route-engine`](https://github.com/cpauldev/route-engine) for safe HTTP route boundaries.
+- [`boundary-engine`](https://github.com/cpauldev/boundary-engine) for safe HTTP route boundaries.
 - [`secret-engine`](https://github.com/cpauldev/secret-engine) for context-bound encryption and secret handling.
 - [`session-engine`](https://github.com/cpauldev/session-engine) for browser session and cache lifecycle management.
 

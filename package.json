@@ -1,6 +1,6 @@
 {
   "name": "redact-log",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "author": "Christian Paul (https://github.com/cpauldev)",
   "description": "RedactLog is a TypeScript logging and redaction toolkit for safely handling secrets, tokens, credentials, and provider identifiers before they reach logs.",
