@@ -1,0 +1,57 @@
+{
+  "name": "redact-log",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Christian Paul (https://github.com/cpauldev)",
+  "description": "RedactLog is a TypeScript logging and redaction toolkit for safely handling secrets, tokens, credentials, and provider identifiers before they reach logs.",
+  "keywords": [
+    "logging",
+    "redaction",
+    "security",
+    "typescript",
+    "secrets",
+    "tokens",
+    "jwt",
+    "stripe",
+    "safe-logging"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpauldev/redact-log.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cpauldev/redact-log/issues"
+  },
+  "homepage": "https://github.com/cpauldev/redact-log#readme",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "bun test src/__tests__",
+    "test:smoke": "bun -e \"const mod = await import('./dist/index.js'); for (const key of ['redactString','redactValue','createRedactor','createLogger','createConsoleBridge']) { if (typeof mod[key] !== 'function') throw new Error('Missing export: ' + key); }\"",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "bun-types": "^1.3.14",
+    "typescript": "^6.0.3"
+  },
+  "private": false
+}
