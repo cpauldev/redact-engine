@@ -1,8 +1,8 @@
 import type {
   ConsoleLike,
+  LogLevel,
   Logger,
   LoggerOptions,
-  LogLevel,
   RedactionPreset,
   Redactor,
   RedactorOptions,
@@ -88,7 +88,9 @@ export const stripeRedactionPreset: RedactionPreset = {
   ],
 };
 
-function mergeOptions(options: RedactorOptions = {}): Required<RedactorOptions> {
+function mergeOptions(
+  options: RedactorOptions = {},
+): Required<RedactorOptions> {
   const presets = [defaultRedactionPreset, ...(options.presets ?? [])];
   return {
     censor: options.censor ?? DEFAULT_CENSOR,
@@ -123,7 +125,7 @@ function testPattern(pattern: RegExp, value: string): boolean {
 
 /**
  * Creates a custom redactor instance configured with string rules, key patterns, and presets.
- * 
+ *
  * @param options Redactor configuration options.
  * @returns A redactor instance with `redactString` and `redactValue` methods.
  */
@@ -131,7 +133,10 @@ export function createRedactor(options: RedactorOptions = {}): Redactor {
   const resolved = mergeOptions(options);
 
   const redactStringWithOptions = (value: string): string =>
-    resolved.stringRules.reduce((current, rule) => applyRule(current, rule), value);
+    resolved.stringRules.reduce(
+      (current, rule) => applyRule(current, rule),
+      value,
+    );
 
   const isSensitiveKey = (key: string): boolean =>
     resolved.keyPatterns.some((pattern) => testPattern(pattern, key));
@@ -221,7 +226,8 @@ export function createRedactor(options: RedactorOptions = {}): Redactor {
 
   return {
     redactString: redactStringWithOptions,
-    redactValue: <T>(value: T): T => visit(value, 0, new WeakSet<object>()) as T,
+    redactValue: <T>(value: T): T =>
+      visit(value, 0, new WeakSet<object>()) as T,
   };
 }
 
@@ -229,7 +235,7 @@ const defaultRedactor = createRedactor();
 
 /**
  * Redacts sensitive credentials and tokens within a flat string using the default preset.
- * 
+ *
  * @param value The string to sanitize.
  * @returns The sanitized string.
  */
@@ -240,7 +246,7 @@ export function redactString(value: string): string {
 /**
  * Recursively sanitizes sensitive object keys and string values using the default preset.
  * Supports handling of circular objects, Errors, Maps, and Sets.
- * 
+ *
  * @param value The object or value to sanitize.
  * @returns A sanitized deep copy of the value.
  */
@@ -272,7 +278,7 @@ const LEVEL_TO_METHOD: Record<
 
 /**
  * Creates a redacting logger that sanitizes message strings and metadata objects before writing them to the console.
- * 
+ *
  * @param options Logger options including redaction rules, target console, and log level.
  * @returns A structured Logger instance.
  */
@@ -309,7 +315,7 @@ export function createLogger(options: LoggerOptions = {}): Logger {
 
 /**
  * Bridges the global console object to route console calls through a redacting logger.
- * 
+ *
  * @param logger The redacting logger to route messages through.
  * @param target The target console-like object to mock (defaults to globalThis.console).
  * @returns A function that restores the original console methods when called.

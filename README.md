@@ -16,13 +16,13 @@ It is designed for developers building APIs, SaaS dashboards, CLIs, workers, bil
 
 ## Why use RedactLog?
 
-| Feature | Without RedactLog | With **RedactLog** |
-| :----------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| **Sensitive Fields**     | Every logger call needs manual filtering.                                                | 🛡️ **Sensitive Fields.** Central key-pattern redaction handles common secret names.                                 |
-| **Token Strings**        | Bearer tokens, JWTs, cookies, and assignment-style secrets can leak in messages.         | 🎟️ **Token Strings.** String rules redact common token formats anywhere in text.                                     |
-| **Provider Logs**        | Stripe-like IDs and keys require custom sanitizer code.                                  | 🔌 **Provider Logs.** Use `stripeRedactionPreset` or add your own preset.                                            |
-| **Complex Values**       | Circular objects, errors, maps, and sets often break or leak details.                    | 🧩 **Complex Values.** Built-in traversal sanitizes common runtime values safely.                                    |
-| **Console Usage**        | Existing `console.*` calls bypass logger sanitization.                                   | 🖥️ **Console Bridge.** `createConsoleBridge()` routes console calls through a redacting logger.                      |
+| Feature              | Without RedactLog                                                                | With **RedactLog**                                                                              |
+| :------------------- | :------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| **Sensitive Fields** | Every logger call needs manual filtering.                                        | 🛡️ **Sensitive Fields.** Central key-pattern redaction handles common secret names.             |
+| **Token Strings**    | Bearer tokens, JWTs, cookies, and assignment-style secrets can leak in messages. | 🎟️ **Token Strings.** String rules redact common token formats anywhere in text.                |
+| **Provider Logs**    | Stripe-like IDs and keys require custom sanitizer code.                          | 🔌 **Provider Logs.** Use `stripeRedactionPreset` or add your own preset.                       |
+| **Complex Values**   | Circular objects, errors, maps, and sets often break or leak details.            | 🧩 **Complex Values.** Built-in traversal sanitizes common runtime values safely.               |
+| **Console Usage**    | Existing `console.*` calls bypass logger sanitization.                           | 🖥️ **Console Bridge.** `createConsoleBridge()` routes console calls through a redacting logger. |
 
 ---
 
@@ -138,15 +138,15 @@ restoreConsole();
 
 ## API Reference
 
-| Export | Purpose |
-| :-- | :-- |
-| `redactString(value)` | Redacts sensitive token-like text in a string. |
-| `redactValue(value)` | Recursively redacts sensitive fields and string values. |
-| `createRedactor(options)` | Creates a reusable redactor with custom rules and presets. |
-| `createLogger(options)` | Creates a redacting logger with level filtering. |
+| Export                                  | Purpose                                                                |
+| :-------------------------------------- | :--------------------------------------------------------------------- |
+| `redactString(value)`                   | Redacts sensitive token-like text in a string.                         |
+| `redactValue(value)`                    | Recursively redacts sensitive fields and string values.                |
+| `createRedactor(options)`               | Creates a reusable redactor with custom rules and presets.             |
+| `createLogger(options)`                 | Creates a redacting logger with level filtering.                       |
 | `createConsoleBridge(logger, console?)` | Routes `console.debug/info/log/warn/error` through a redacting logger. |
-| `defaultRedactionPreset` | Built-in secret, token, cookie, JWT, and credential rules. |
-| `stripeRedactionPreset` | Stripe-style key, ID, email, card, and phone redaction rules. |
+| `defaultRedactionPreset`                | Built-in secret, token, cookie, JWT, and credential rules.             |
+| `stripeRedactionPreset`                 | Stripe-style key, ID, email, card, and phone redaction rules.          |
 
 ---
 
